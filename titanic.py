@@ -13,4 +13,16 @@ df['cabin'] = df['cabin'].fillna('Desconocido')
 df['boat'] = df['boat'].fillna('Desconocido')
 df['home.dest'] = df['home.dest'].fillna('Desconocido')
 
-print(df)
+
+def createDummies(df1, var_name):
+    #Se extraen las variables dummies de la columano 'sex'(0 o 1; True o False)
+    dummies = pd.get_dummies(df1[var_name], prefix=1)
+    #Se elimina la columna 'sex'
+    #Axis = 1 hace referencia a las columnas y Axis= 0, a las filas
+    df1 = df1.drop([var_name], axis=1)
+    #Se concatena la la nueva columna df_dummies
+    df1 = pd.concat([df1, dummies], axis=1)
+
+    return df1
+
+print(createDummies(df, 'sex'))
