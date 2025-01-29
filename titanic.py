@@ -25,4 +25,11 @@ def createDummies(df1, var_name):
 
     return df1
 
-print(createDummies(df, 'sex'))
+df = createDummies(df, 'sex')
+
+#Regla de Sturges (division proporcional en un histograma): 1+log2(n) -> n = muestra
+k = int(np.ceil(1 + np.log2(len(df['age']))))
+#Histograma de las edades y sex correspondientes
+plt.hist(df['age'], bins=k)
+plt.title('Histograma de las edades')
+plt.show()
