@@ -16,7 +16,7 @@ df['home.dest'] = df['home.dest'].fillna('Desconocido')
 
 def createDummies(df1, var_name):
     #Se extraen las variables dummies de la columano 'sex'(0 o 1; True o False)
-    dummies = pd.get_dummies(df1[var_name], prefix=1)
+    dummies = pd.get_dummies(df1[var_name], prefix=var_name)
     #Se elimina la columna 'sex'
     #Axis = 1 hace referencia a las columnas y Axis= 0, a las filas
     df1 = df1.drop([var_name], axis=1)
@@ -33,3 +33,9 @@ k = int(np.ceil(1 + np.log2(len(df['age']))))
 plt.hist(df['age'], bins=k)
 plt.title('Histograma de las edades')
 plt.show()
+
+columns_all = df.columns.values.tolist()
+desert_columns = ['pclass', 'sibsp', 'parch', 'ticket', 'embarked', 'boat', 'body']
+
+subconjunt = [x for x in columns_all if x not in desert_columns]
+print(subconjunt)
